@@ -1,0 +1,34 @@
+# Deps & build
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Env & secrets (kabhi commit mat karo)
+.env
+.env.*
+!.env.example
+
+# Data (dev file-store + uploads)
+backend/data/
+backend/uploads/
+*.sqlite
+*.db
+*.db-journal
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Docker volumes
+pgdata/
+redisdata/

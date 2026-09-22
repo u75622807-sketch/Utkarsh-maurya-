@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* Class-based dark mode (Tailwind v4 custom variant) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply bg-slate-100 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+  /* iOS Safari 100vh bug se bachne ke liye dvh layout me */
+}
+
+/* Accessible focus ring (keyboard only) */
+:focus-visible {
+  outline: 2px solid var(--color-indigo-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Touch targets on coarse pointers */
+@media (pointer: coarse) {
+  button, a, input, select, textarea, [role="button"] {
+    min-height: 44px;
+  }
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Thin scrollbars for chat panes */
+.slim-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-slate-400) transparent;
+}
+.slim-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.slim-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-slate-400);
+  border-radius: 999px;
+}
+
+/* Safe-markdown prose (rendered HTML is escaped-first, see utils/markdown.ts) */
+.md h1, .md h2, .md h3 { @apply font-semibold mt-3 mb-1; }
+.md h1 { @apply text-lg; }
+.md h2 { @apply text-base; }
+.md p { @apply my-1.5 leading-relaxed; }
+.md ul { @apply list-disc pl-5 my-1.5 space-y-0.5; }
+.md ol { @apply list-decimal pl-5 my-1.5 space-y-0.5; }
+.md code { @apply rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.85em] dark:bg-slate-800; }
+.md pre { @apply my-2 overflow-x-auto rounded-lg bg-slate-900 p-3 text-slate-100 text-sm dark:bg-black/60; }
+.md pre code { @apply bg-transparent p-0 text-inherit; }
+.md strong { @apply font-semibold; }
